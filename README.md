@@ -1,4 +1,4 @@
-# lfa_trabalhopratico2_20221 💼
+# Algoritmo CYK 💼
 Repositório para o trabalho prático da segunda unidade da disciplina Linguagens Formais e Autômatos 2022.1
 
 ## Leitura de arquivo 📑
