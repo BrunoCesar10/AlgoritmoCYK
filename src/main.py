@@ -52,29 +52,55 @@ def reconhecedor(palavra, gramatica):
                 if letra in r:
                     tabela[1].append(regra[0])
                     continue
-
+              
     print(tabela)
+    print(gramatica)
 
     #Preenchimento das outras linhas
     n = tamanho
-    j = 1
-    k = 1
 
     for i in range(2, n):
         print('i: {}'.format(i))
+
         for j in range(1, (n - i + 1)):
             print('j: {}'.format(j))
-            for k in range(1, (i - 1)):
-                print('k: {}'.format(k))
-                valor = tabela[k][j]+tabela[i - k][j + k]
-                print(valor)
-                valor_regra = ''
-                for regra in gramatica:
-                    if valor == regra[1]:
-                        valor_regra = regra[0]
+            if i == 2:
+                valor_regra = '-'
+                k = 1
+                valor = tabela[k][j] + tabela[i - k][j + k]
+                for x in range(len(gramatica)):
+                    if isinstance(gramatica[x][1], tuple):
+                        if valor in gramatica[x][1]:
+                            valor_regra = gramatica[x][0]
+                            break
+                    else:
+                        if valor in gramatica[x][1]:
+                            valor_regra = gramatica[x][0]
+                            break
                 tabela[i].append(valor_regra)
 
+            for k in range(1, (i - 1)):
+                print('k: {}'.format(k))
+                valor_regra = '-'
+                valor = tabela[k][j] + tabela[i - k][j + k]
+                for x in range(len(gramatica)):
+                    if isinstance(gramatica[x][1], tuple):
+                        if valor in gramatica[x][1]:
+                            valor_regra = gramatica[x][0]
+                            break
+                    else:
+                        if valor in gramatica[x][1]:
+                            valor_regra = gramatica[x][0]
+                            break
+                tabela[i].append(valor_regra)
 
+        for linha in tabela:
+            print(linha)
+
+    if tabela[len(palavra)][1] != '-':
+        print('Palavra Aceita')
+    else:
+        print('Palavra Rejeitada')
 
 
 def main():
