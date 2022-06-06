@@ -44,7 +44,6 @@ def reconhecedor(palavra, gramatica):
             linha = [x]
             tabela.append(linha)
 
-
     #Preenchimento da Primeira Linha
     for letra in palavra:
         for regra in gramatica:
@@ -58,6 +57,7 @@ def reconhecedor(palavra, gramatica):
             tabela[q].append(' ')
 
     print(gramatica)
+    print('')
 
     #Preenchimento das outras linhas   
     n = tamanho
@@ -67,12 +67,10 @@ def reconhecedor(palavra, gramatica):
         for j in range(1, (n - i + 1)):
 
             for k in range(1, i):
-                # print('i: {}, j: {}, k: {}'.format(i, j, k))
 
                 y = tabela[k][j]
                 z = tabela[i - k][j + k]
                 x = y + z
-                # print(x)
 
                 for regra in gramatica:
                     if isinstance(regra[1], tuple):
