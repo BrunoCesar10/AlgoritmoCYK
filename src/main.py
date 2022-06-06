@@ -36,8 +36,8 @@ def reconhecedor(palavra, gramatica):
     for x in range(tamanho):
         if x == 0:
             linha = [0]
-            for y in palavra:
-                linha.append(y)
+            for t in palavra:
+                linha.append(t)
             tabela.append(linha)
 
         else:
@@ -52,54 +52,44 @@ def reconhecedor(palavra, gramatica):
                 if letra in r:
                     tabela[1].append(regra[0])
                     continue
-              
-    print(tabela)
+
+    for q in range(2, tamanho):
+        for s in range(tamanho - 1):
+            tabela[q].append(' ')
+
     print(gramatica)
 
-    #Preenchimento das outras linhas
+    #Preenchimento das outras linhas   
     n = tamanho
 
     for i in range(2, n):
 
         for j in range(1, (n - i + 1)):
-            if i == 2:
-                valor_regra = '-'
-                k = 1
-                valor = tabela[k][j] + tabela[i - k][j + k]
-                for x in range(len(gramatica)):
-                    if isinstance(gramatica[x][1], tuple):
-                        if valor in gramatica[x][1]:
-                            valor_regra = gramatica[x][0]
-                            break
+
+            for k in range(1, i):
+                # print('i: {}, j: {}, k: {}'.format(i, j, k))
+
+                y = tabela[k][j]
+                z = tabela[i - k][j + k]
+                x = y + z
+                # print(x)
+
+                for regra in gramatica:
+                    if isinstance(regra[1], tuple):
+                        if x in regra[1]:
+                            tabela[i][j] = regra[0] 
                     else:
-                        if valor in gramatica[x][1]:
-                            valor_regra = gramatica[x][0]
-                            break
-                tabela[i].append(valor_regra)
+                        if x == regra[1]:
+                            tabela[i][j] = regra[0]          
 
-            for k in range(1, (i - 1)):
-                valor_regra = '-'
-                valor = tabela[k][j] + tabela[i - k][j + k]
-                for x in range(len(gramatica)):
-                    if isinstance(gramatica[x][1], tuple):
-                        if valor in gramatica[x][1]:
-                            valor_regra = gramatica[x][0]
-                            break
-                    else:
-                        if valor in gramatica[x][1]:
-                            valor_regra = gramatica[x][0]
-                            break
-                tabela[i].append(valor_regra)
+    for linha in tabela:
+        print(linha)
+    print('')
 
-        for linha in tabela:
-            print(linha)
-        print('')
-
-    if tabela[len(palavra)][1] != '-':
+    if tabela[len(palavra)][1] == gramatica[0][0]:
         print('Palavra Aceita')
     else:
         print('Palavra Rejeitada')
-
 
 def main():
     g = gramatica()
