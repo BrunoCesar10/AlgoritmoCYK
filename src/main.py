@@ -60,10 +60,8 @@ def reconhecedor(palavra, gramatica):
     n = tamanho
 
     for i in range(2, n):
-        print('i: {}'.format(i))
 
         for j in range(1, (n - i + 1)):
-            print('j: {}'.format(j))
             if i == 2:
                 valor_regra = '-'
                 k = 1
@@ -80,7 +78,6 @@ def reconhecedor(palavra, gramatica):
                 tabela[i].append(valor_regra)
 
             for k in range(1, (i - 1)):
-                print('k: {}'.format(k))
                 valor_regra = '-'
                 valor = tabela[k][j] + tabela[i - k][j + k]
                 for x in range(len(gramatica)):
@@ -96,6 +93,7 @@ def reconhecedor(palavra, gramatica):
 
         for linha in tabela:
             print(linha)
+        print('')
 
     if tabela[len(palavra)][1] != '-':
         print('Palavra Aceita')
