@@ -31,6 +31,7 @@ def reconhecedor(palavra, gramatica):
     tabela = []
     gramatica = gramatica
     tamanho = len(palavra) + 1
+    palavra_str = palavra
     palavra = separar(palavra)
 
     for x in range(tamanho):
@@ -62,23 +63,26 @@ def reconhecedor(palavra, gramatica):
     #Preenchimento das outras linhas   
     n = tamanho
 
-    for i in range(2, n):
+    try:
+        for i in range(2, n):
 
-        for j in range(1, (n - i + 1)):
+            for j in range(1, (n - i + 1)):
 
-            for k in range(1, i):
+                for k in range(1, i):
 
-                y = tabela[k][j]
-                z = tabela[i - k][j + k]
-                x = y + z
+                    y = tabela[k][j]
+                    z = tabela[i - k][j + k]
+                    x = y + z
 
-                for regra in gramatica:
-                    if isinstance(regra[1], tuple):
-                        if x in regra[1]:
-                            tabela[i][j] = regra[0] 
-                    else:
-                        if x == regra[1]:
-                            tabela[i][j] = regra[0]          
+                    for regra in gramatica:
+                        if isinstance(regra[1], tuple):
+                            if x in regra[1]:
+                                tabela[i][j] = regra[0] 
+                        else:
+                            if x == regra[1]:
+                                tabela[i][j] = regra[0]
+    except IndexError:
+        print('Ops! Um dos caracteres da palavra inserida, ({}) não está na gramática'.format(palavra_str)) 
 
     for linha in tabela:
         print(linha)
