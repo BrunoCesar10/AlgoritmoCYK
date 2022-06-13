@@ -82,7 +82,7 @@ def reconhecedor(palavra, gramatica):
                             if x == regra[1]:
                                 tabela[i][j] = regra[0]
     except IndexError:
-        print('Ops! Um dos caracteres da palavra inserida, ({}) não está na gramática'.format(palavra_str)) 
+        print('Ops! Um dos caracteres da palavra inserida, ({}), não esta na gramatica'.format(palavra_str)) 
 
     for linha in tabela:
         print(linha)
